@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">aplication_2_ForCarRent</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    //.................
+    <string name="app_name">carRentForCompany</string>
+    <string name="title_activity_reserve">reserveActivity</string>
+
+    <string name="id">id</string>
+    <string name="first_name">first name</string>
+    <string name="last_name">last name</string>
+    <string name="phone">phone</string>
+    <string name="credit_card_number">credit card number:</string>
+    <string name="add_client">ADD CLIENT</string>
+    <string name="email">email</string>
+
+    <string name="city">city</string>
+    <string name="street">street</string>
+    <string name="adress_number">adress number</string>
+    <string name="number_ofParking_available">number of parking available</string>
+    <string name="branchNumber_id">branch number_id</string>
+    <string name="add_branch">ADD BRANCH</string>
+
+    <string name="model_code_id">model code_id</string>
+    <string name="company_name">company name</string>
+    <string name="model_name">model name</string>
+    <string name="motor_volume">motor volume</string>
+    <string name="is_automatic">is the car automatic?</string>
+    <string name="number_of_seats">number of seats</string>
+    <string name="add_car_model">ADD CAR MODEL</string>
+
+    <string name="car_code_id">car code_id</string>
+    <string name="car_model">car model</string>
+    <string name="kilometers">kilometers traveled</string>
+    <string name="branch">cars fixed branch</string>
+    <string name="add_car_button">ADD CAR</string>
+
+    <string name="reserve_number_id">reserve number_id</string>
+    <string name="car_number">car number</string>
+    <string name="is_opened">is opened?</string>
+    <string name="client_number">client number</string>
+    <string name="rent_beginning">rent beginning date</string>
+    <string name="rent_end">rent end date</string>
+    <string name="start_kilometers">kilometers on the beginning</string>
+    <string name="end_kilometers">kilometers on the end</string>
+    <string name="is_fueled">is fueled?</string>
+    <string name="liters_fueled">how many liters?</string>
+    <string name="total_to_pay">total to pay</string>
+    <string name="add_reserve_button">ADD RESERVE</string>
+
+
+    <string name="action_settings">Settings</string>
+</resources>
