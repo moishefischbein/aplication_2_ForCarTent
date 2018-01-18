@@ -31,12 +31,11 @@ public class All_Branches extends Fragment {
 
 
     private void initItemByListView(List<Branch> branches) {
+
         ListView lv = (ListView) view.findViewById(R.id.allBranchsList);
 
         BranchAdapter adapter = new BranchAdapter(branches, getActivity());
 
-        ListView lv = (ListView) view.findViewById(R.id.clientsList);
-        BranchAdapter adapter = new BranchAdapter(branches, getActivity());
 
         lv.setAdapter(adapter);
     }

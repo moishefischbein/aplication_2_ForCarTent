@@ -57,7 +57,9 @@ public class AllFreeCars extends Fragment {
 
     private void initItemByListView(List<Car> cars){
 
+
         ListView lv = (ListView) rootView.findViewById(R.id.freeCarsList);
+
         CarAdapter adapter = new CarAdapter(cars, getActivity());
 
         lv.setAdapter(adapter);

@@ -43,8 +43,12 @@ public class CarAdapter extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
+
         View v = activity.getLayoutInflater()
                 .inflate(R.layout.item_row, viewGroup, false);
+
+
+
 
         Car car = cars.get(i);
 
