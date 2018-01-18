@@ -1,6 +1,5 @@
 package com.example.moish.aplication_2_forCarRent.controller.fragments;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.moish.aplication_2_forCarRent.R;
-import com.example.moish.aplication_2_forCarRent.controller.MainActivity;
 import com.example.moish.aplication_2_forCarRent.model.adapter.CarAdapter;
 import com.example.moish.aplication_2_forCarRent.model.backend.DBManagerFactory;
 import com.example.moish.aplication_2_forCarRent.model.entities.Car;
@@ -58,7 +56,7 @@ public class AllFreeCars extends Fragment {
 
     private void initItemByListView(List<Car> cars){
 
-        CarAdapter adapter = new CarAdapter(cars, this);
+        CarAdapter adapter = new CarAdapter(cars, getActivity());
 
         lv.setAdapter(adapter);
     }

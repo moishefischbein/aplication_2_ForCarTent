@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import com.example.moish.aplication_2_forCarRent.R;
 import com.example.moish.aplication_2_forCarRent.model.adapter.BranchAdapter;
-import com.example.moish.aplication_2_forCarRent.model.adapter.ClientAdapter;
 import com.example.moish.aplication_2_forCarRent.model.entities.Branch;
 
 import java.util.List;
@@ -21,19 +20,21 @@ import java.util.List;
 
 public class All_Branches extends Fragment {
 
-View view;
+    View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-                view = inflater.inflate(R.layout.fragment_all_branches, container, false);
+        view = inflater.inflate(R.layout.fragment_all_branches, container, false);
         return view;
     }
 
 
-    private void initItemByListView(List<Branch> branches){
+    private void initItemByListView(List<Branch> branches) {
         ListView lv = (ListView) view.findViewById(R.id.clientsList);
 
-        BranchAdapter adapter = new BranchAdapter(branches, this);
+        BranchAdapter adapter = new BranchAdapter(branches, getActivity());
 
         lv.setAdapter(adapter);
+    }
 }
