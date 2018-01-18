@@ -64,7 +64,7 @@ public class MySQL_DBManager implements DB_manager {
     public long addClient(ContentValues values)
     {
 
-        if(isClientDefined(Functions.contentValuesToClient(values).getId())==true) {
+        if(isClientDefined(Functions.contentValuesToClient(values).getId())==false) {
             try {
                 String result = PHPtools.POST(WEB_URL + "/addClient.php", values);
                 long id = Long.parseLong(result);
@@ -88,9 +88,9 @@ public class MySQL_DBManager implements DB_manager {
         for (Client clt:clients
              ) {
             if(clt.getId() == id)
-                return false;
+                return true;
         }
-        return true;
+        return false;
     }
 
     private void printLog(String s) {
@@ -179,18 +179,25 @@ public class MySQL_DBManager implements DB_manager {
     }
 
     @Override
-    public boolean updateCar(long kilometersTraveled, ContentValues values) {
-
-       Car car = Functions.contentValuesToCar(values);
-
-        //delete from the data base
-        removeCar(car.getCarNumber_id());
-        //update the traveled kilometers
-        car.setKilometersTraveled(kilometersTraveled);
-        //add the update car
-        addCar(Functions.carToContentValues(car));
+    public int updateCar( ContentValues values) {
 
 
+        try {
+            String result = PHPtools.POST(WEB_URL + "updateCar.php", values);
+            if(result.length() > 10){
+                printLog( result);
+                return -1;
+            }
+            int id = Integer.parseInt(result);
+            if (id > 0)
+                SetUpdate();
+            printLog("addCar:\n" + result);
+            return id;
+        } catch (IOException e)
+        {
+            printLog("addCar Exception:\n" + e);
+            return -1;
+        }
     }
 
     @Override
@@ -217,10 +224,36 @@ public class MySQL_DBManager implements DB_manager {
         return null;
     }
 
+    public List<Car> getFreeCarOfBranch(int id_branch){
+
+        List<Car> freeCars = getFreeCars();
+        List<Car> carsOfBranch = new ArrayList<Car>();
+
+        for (Car c:freeCars
+             ) {
+            if(c.getFixedBranch() == id_branch)
+                carsOfBranch.add(c);
+        }
+        return carsOfBranch;
+    }
+
+
     @Override
     public long addCarReserve(ContentValues values) {
         try {
             String result = PHPtools.POST(WEB_URL + "/addReserve.php", values);
+            String resultRemove = PHPtools.POST(WEB_URL + "/removeFreeCar.php", values);
+
+            if(result.length() > 10){
+                printLog(result);
+                return -1;
+            }
+
+            if(resultRemove.length() > 10){
+                printLog(result);
+                return -1;
+            }
+
             long id = Long.parseLong(result);
             if (id > 0)
                 SetUpdate();
@@ -239,7 +272,7 @@ public class MySQL_DBManager implements DB_manager {
     }
 
     @Override
-    public boolean updateCarReserve(long id, ContentValues values) {
+    public boolean updateCarReserve(ContentValues values) {
         return false;
     }
 
@@ -287,4 +320,55 @@ public class MySQL_DBManager implements DB_manager {
     }
 
 
+    @Override
+    public long addCarModel(ContentValues values) {
+        try {
+            String result = PHPtools.POST(WEB_URL + "/addCarModel.php", values);
+            long id = Long.parseLong(result);
+            if (id > 0)
+                SetUpdate();
+            printLog("addCarModel:\n" + result);
+            return id;
+        } catch (IOException e)
+        {
+            printLog("addCarModel Exception:\n" + e);
+            return -1;
+        }
+    }
+
+    @Override
+    public boolean removeCarModel(long id) {
+        return false;
+    }
+
+    @Override
+    public boolean updateCarModel(long id, ContentValues values) {
+        return false;
+    }
+
+    @Override
+    public List<CarModel> getCarModels() {
+        List<CarModel> result = new ArrayList<CarModel>();
+        try {
+            String str = PHPtools.GET(WEB_URL + "CarModel.php");
+            JSONArray array = new JSONObject(str).getJSONArray("CarModel");
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jsonObject = array.getJSONObject(i);
+                CarModel carModel = new CarModel();
+                carModel.setModelName(jsonObject.getString("modelName"));
+                carModel.setCompanyName(jsonObject.getString("companyName"));
+                carModel.setMotorVolume(jsonObject.getInt("motorVolume"));
+                carModel.setNumberOfSeats(jsonObject.getInt("numberOfSeats"));
+                carModel.setAutomatic(jsonObject.getInt("isAutomatic"));
+                carModel.setModelCode(jsonObject.getInt("_id"));
+
+                result.add(carModel);
+            }
+            return result;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

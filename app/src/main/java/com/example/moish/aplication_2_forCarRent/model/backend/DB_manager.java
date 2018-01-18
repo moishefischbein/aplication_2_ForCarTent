@@ -22,13 +22,18 @@ public interface DB_manager {
 
     long addCar(ContentValues car);
     boolean removeCar(long id);
-    boolean updateCar(long id, ContentValues values);
+    int updateCar( ContentValues values);
     List<Car> getCar();
 
     long addCarReserve(ContentValues carReserve);
     boolean removeCarReserve(int id);
-    boolean updateCarReserve(long kilometersTraveled, ContentValues values);
+    boolean updateCarReserve( ContentValues values);
     List<CarReserve> getCarReserve();
+
+    long addCarModel(ContentValues carModel);
+    boolean removeCarModel(long id);
+    boolean updateCarModel(long id, ContentValues values);
+    List<CarModel> getCarModels();
 
     public boolean isUpdate();
 

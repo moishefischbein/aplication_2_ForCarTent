@@ -1,6 +1,6 @@
 package com.example.moish.aplication_2_forCarRent.model.backend;
 
-import com.example.moish.carrentforcompany.model.datasource.MySQL_DBManager;
+import com.example.moish.aplication_2_forCarRent.model.datasource.MySQL_DBManager;
 
 /**
  * Created by moish on 16/11/2017.

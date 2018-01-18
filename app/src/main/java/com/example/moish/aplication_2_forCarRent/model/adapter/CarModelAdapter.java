@@ -6,9 +6,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.moish.carrentforcompany.R;
-import com.example.moish.carrentforcompany.model.entities.CarModel;
-import com.example.moish.carrentforcompany.model.entities.Client;
+import com.example.moish.aplication_2_forCarRent.R;
+import com.example.moish.aplication_2_forCarRent.model.entities.CarModel;
+import com.example.moish.aplication_2_forCarRent.model.entities.Client;
 
 import java.util.List;
 

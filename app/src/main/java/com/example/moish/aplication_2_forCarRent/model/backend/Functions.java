@@ -2,7 +2,7 @@ package com.example.moish.aplication_2_forCarRent.model.backend;
 
 import android.content.ContentValues;
 import android.net.Uri;
-import com.example.moish.aplication_2_forCarRent.entities.*;
+import com.example.moish.aplication_2_forCarRent.model.entities.*;
 
 /**
  * Created by moish on 16/11/2017.

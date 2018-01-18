@@ -1,5 +1,8 @@
 package com.example.moish.aplication_2_forCarRent.controller;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +17,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.moish.aplication_2_forCarRent.R;
+import com.example.moish.aplication_2_forCarRent.controller.fragments.AllFreeCars;
+import com.example.moish.aplication_2_forCarRent.controller.fragments.All_Branches;
+import com.example.moish.aplication_2_forCarRent.controller.fragments.Home;
+import com.example.moish.aplication_2_forCarRent.controller.fragments.Profile;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -82,17 +89,50 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.All_the_branches) {
 
-        } else if (id == R.id.nav_slideshow) {
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
-        } else if (id == R.id.nav_manage) {
+            Fragment fragment = new All_Branches();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.addToBackStack(null);
 
-        } else if (id == R.id.nav_share) {
+            fragmentTransaction.commit();
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.Home) {
+
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+            Fragment fragment = new Home();
+            fragmentTransaction.add(R.id.fragment_container, fragment);
+            fragmentTransaction.addToBackStack(null);
+
+            fragmentTransaction.commit();
+
+        }else if (id == R.id.Exit) {
+
+            finish();
+            System.exit(0);
+
+        } else if (id == R.id.All_the_free_cars) {
+
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+            Fragment fragment = new AllFreeCars();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.addToBackStack(null);
+
+            fragmentTransaction.commit();
+
+        }  else if (id == R.id.Actual_state) {
+
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+            Fragment fragment = new Profile();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.addToBackStack(null);
+
+            fragmentTransaction.commit();
 
         }
 

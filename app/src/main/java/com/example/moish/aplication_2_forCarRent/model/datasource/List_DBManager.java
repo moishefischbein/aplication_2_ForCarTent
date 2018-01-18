@@ -1,3 +1,4 @@
+/*
 package com.example.moish.aplication_2_forCarRent.model.datasource;
 
 import android.content.ContentValues;
@@ -6,6 +7,7 @@ import com.example.moish.aplication_2_forCarRent.model.backend.DB_manager;
 import com.example.moish.aplication_2_forCarRent.model.backend.Functions;
 import com.example.moish.aplication_2_forCarRent.model.entities.Branch;
 import com.example.moish.aplication_2_forCarRent.model.entities.Car;
+import com.example.moish.aplication_2_forCarRent.model.entities.CarModel;
 import com.example.moish.aplication_2_forCarRent.model.entities.CarReserve;
 import com.example.moish.aplication_2_forCarRent.model.entities.Client;
 
@@ -17,9 +19,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+*/
 /**
  * Created by moish on 16/11/2017.
- */
+ *//*
+
 
 
     public class List_DBManager implements DB_manager {
@@ -59,6 +63,7 @@ import java.util.List;
         Log.d("ListDBManager", c.toString());
         clients.add(c);
         return c.getId();}
+*/
 /*
         boolean isExistThisClient = isThisClientExist(c.getId());
         if(isExistThisClient == false)
@@ -68,7 +73,8 @@ import java.util.List;
         }
     return 0;
     }
-*/
+*//*
+
 
 
     @Override
@@ -261,3 +267,4 @@ import java.util.List;
 }
 
 
+*/

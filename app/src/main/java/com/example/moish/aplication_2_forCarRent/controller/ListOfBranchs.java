@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.moish.aplication_2_forCarRent.R;
+import com.example.moish.aplication_2_forCarRent.model.adapter.BranchAdapter;
 import com.example.moish.aplication_2_forCarRent.model.backend.DBManagerFactory;
 import com.example.moish.aplication_2_forCarRent.model.backend.Functions;
 import com.example.moish.aplication_2_forCarRent.model.entities.Branch;

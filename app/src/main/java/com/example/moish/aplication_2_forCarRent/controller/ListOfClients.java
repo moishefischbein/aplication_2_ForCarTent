@@ -6,10 +6,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.example.moish.carrentforcompany.R;
-import com.example.moish.carrentforcompany.model.adapter.ClientAdapter;
-import com.example.moish.carrentforcompany.model.backend.DBManagerFactory;
-import com.example.moish.carrentforcompany.model.entities.Client;
+import com.example.moish.aplication_2_forCarRent.R;
+import com.example.moish.aplication_2_forCarRent.model.adapter.ClientAdapter;
+import com.example.moish.aplication_2_forCarRent.model.backend.DBManagerFactory;
+import com.example.moish.aplication_2_forCarRent.model.entities.Client;
 
 import java.util.List;
 
