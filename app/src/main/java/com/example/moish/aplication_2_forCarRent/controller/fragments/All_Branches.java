@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import com.example.moish.aplication_2_forCarRent.R;
 import com.example.moish.aplication_2_forCarRent.model.adapter.BranchAdapter;
-import com.example.moish.aplication_2_forCarRent.model.adapter.ClientAdapter;
 import com.example.moish.aplication_2_forCarRent.model.entities.Branch;
 
 import java.util.List;
@@ -36,6 +35,8 @@ public class All_Branches extends Fragment {
 
         BranchAdapter adapter = new BranchAdapter(branches, getActivity());
 
+        ListView lv = (ListView) view.findViewById(R.id.clientsList);
+        BranchAdapter adapter = new BranchAdapter(branches, getActivity());
 
         lv.setAdapter(adapter);
     }
