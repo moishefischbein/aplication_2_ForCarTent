@@ -21,19 +21,22 @@ import java.util.List;
 
 public class All_Branches extends Fragment {
 
-View view;
+    View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-                view = inflater.inflate(R.layout.fragment_all_branches, container, false);
+        view = inflater.inflate(R.layout.fragment_all_branches, container, false);
         return view;
     }
 
 
-    private void initItemByListView(List<Branch> branches){
-        ListView lv = (ListView) view.findViewById(R.id.clientsList);
+    private void initItemByListView(List<Branch> branches) {
+        ListView lv = (ListView) view.findViewById(R.id.allBranchsList);
 
-        BranchAdapter adapter = new BranchAdapter(branches, this);
+        BranchAdapter adapter = new BranchAdapter(branches, getActivity());
+
 
         lv.setAdapter(adapter);
+    }
 }

@@ -25,13 +25,14 @@ import java.util.List;
 public class AllFreeCars extends Fragment {
 
 
-    ListView lv;
+    View rootView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_all_free_cars, container, false);
-        lv = (ListView) rootView.findViewById(R.id.All_the_free_cars);
+       rootView = inflater.inflate(R.layout.fragment_all_free_cars, container, false);
 
+
+        getListItems();
         return rootView;
     }
 
@@ -58,7 +59,8 @@ public class AllFreeCars extends Fragment {
 
     private void initItemByListView(List<Car> cars){
 
-        CarAdapter adapter = new CarAdapter(cars, this);
+        ListView lv = (ListView) rootView.findViewById(R.id.freeCarsList);
+        CarAdapter adapter = new CarAdapter(cars, getActivity());
 
         lv.setAdapter(adapter);
     }

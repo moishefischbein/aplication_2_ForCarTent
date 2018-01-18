@@ -1,19 +1,15 @@
 package com.example.moish.aplication_2_forCarRent.model.adapter;
 
-import android.app.Fragment;
+import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.view.*;
 
 import com.example.moish.aplication_2_forCarRent.R;
-import com.example.moish.aplication_2_forCarRent.controller.fragments.AllFreeCars;
 import com.example.moish.aplication_2_forCarRent.model.entities.Car;
 
 import java.util.List;
-
-import static android.view.View.inflate;
 
 /**
  * Created by moish on 09/12/2017.
@@ -22,11 +18,11 @@ import static android.view.View.inflate;
 public class CarAdapter extends BaseAdapter{
 
     private final List<Car> cars;
-    private final Fragment fragment;
+    private final Activity activity;
 
-    public CarAdapter(List<Car> cars, AllFreeCars activity) {
+    public CarAdapter(List<Car> cars, Activity activity) {
         this.cars = cars;
-        this.fragment = activity;
+        this.activity = activity;
     }
 
     @Override
@@ -47,8 +43,8 @@ public class CarAdapter extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        View v = inflate(R.layout.item_row, 1, false);
-               // .inflate(R.layout.item_row, viewGroup, false);
+        View v = activity.getLayoutInflater()
+                .inflate(R.layout.item_row, viewGroup, false);
 
         Car car = cars.get(i);
 
@@ -67,7 +63,6 @@ public class CarAdapter extends BaseAdapter{
         return v;
 
     }
-    {
-    }
+
 
 }

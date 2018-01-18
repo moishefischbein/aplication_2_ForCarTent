@@ -316,6 +316,25 @@ public class MySQL_DBManager implements DB_manager {
 
     @Override
     public List<Car> getFreeCars() {
+        List<Car> result = new ArrayList<Car>();
+        try {
+            String str = PHPtools.GET(WEB_URL + "FreeCars.php");
+            JSONArray array = new JSONObject(str).getJSONArray("FreeCars");
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jsonObject = array.getJSONObject(i);
+                Car car = new Car();
+                car.setCarNumber_id(jsonObject.getInt("_id"));
+                car.setFixedBranch(jsonObject.getInt("fixedBranch"));
+                car.setKilometersTraveled(jsonObject.getInt("kilometersTraveled"));
+                car.setModel(jsonObject.getInt("model"));
+
+                result.add(car);
+            }
+            return result;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
