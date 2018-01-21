@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.All_the_branches) {
 
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -100,7 +101,6 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
 
         } else if (id == R.id.Home) {
-
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
             Fragment fragment = new Home();
@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity
             exitDialog.show(getSupportFragmentManager(), "exit");
 
         } else if (id == R.id.All_the_free_cars) {
-
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
             Fragment fragment = new AllFreeCars();
@@ -125,7 +124,6 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
 
         }  else if (id == R.id.Actual_state) {
-
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
             Fragment fragment = new Profile();
