@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-   <LinearLayout
+   <FrameLayout
        android:id="@+id/fragment_container"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:orientation="vertical"></LinearLayout>
+       android:layout_marginTop="100dp"
+       android:orientation="vertical"></FrameLayout>
 
 </LinearLayout>
 

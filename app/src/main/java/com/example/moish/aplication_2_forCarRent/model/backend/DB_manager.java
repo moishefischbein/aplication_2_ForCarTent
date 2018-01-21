@@ -24,6 +24,7 @@ public interface DB_manager {
     boolean removeCar(long id);
     long updateCar(ContentValues values);
     List<Car> getCar();
+    public List<Car> getFreeCarOfBranch(Branch branch);
 
     long addCarReserve(ContentValues carReserve);
     boolean removeCarReserve(int id);

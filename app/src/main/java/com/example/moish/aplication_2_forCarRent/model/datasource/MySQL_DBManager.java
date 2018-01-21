@@ -224,8 +224,10 @@ public class MySQL_DBManager implements DB_manager {
         return null;
     }
 
-    public List<Car> getFreeCarOfBranch(int id_branch){
+    @Override
+    public List<Car> getFreeCarOfBranch(Branch branch){
 
+        int id_branch = branch.getBranchNumber_id();
         List<Car> freeCars = getFreeCars();
         List<Car> carsOfBranch = new ArrayList<Car>();
 

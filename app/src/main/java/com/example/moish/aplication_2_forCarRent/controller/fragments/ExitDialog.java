@@ -21,7 +21,7 @@ public class ExitDialog extends DialogFragment {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // yes action!
-                        onDestroyView();
+                        getOut();
                     }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -32,12 +32,9 @@ public class ExitDialog extends DialogFragment {
         return builder.create();
                     }
 
-    @Override
-    public void onDestroyView() {
+    public void getOut() {
 
         System.exit(0);
-
-
         super.onDestroyView();
     }
 }
