@@ -244,7 +244,11 @@ public class MySQL_DBManager implements DB_manager {
     public long addCarReserve(ContentValues values) {
         try {
             String result = PHPtools.POST(WEB_URL + "/addReserve.php", values);
-            String resultRemove = PHPtools.POST(WEB_URL + "/deleteFreeCar.php", values);
+
+        //    values.put(Functions.CarConst.CAR_NUMBER, _id.getText().toString());
+            ContentValues v = new ContentValues();
+            v.put(Functions.CarConst.CAR_NUMBER,Integer.toString((Functions.contentValuesToCarReserve(values).getCarNumber())));
+            String resultRemove = PHPtools.POST(WEB_URL + "/deleteFreeCar.php", v);
 
             if(result.length() > 10){
                 printLog(result);

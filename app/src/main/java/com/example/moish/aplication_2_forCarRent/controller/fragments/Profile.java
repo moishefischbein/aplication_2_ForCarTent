@@ -160,7 +160,6 @@ public class Profile extends Fragment implements View.OnClickListener {
                 TotalToPay(reserves, id);
             }
         }.execute();
-
     }
 
     private void TotalToPay(List<CarReserve> reserves, int id) {
@@ -182,7 +181,7 @@ public class Profile extends Fragment implements View.OnClickListener {
 
 
     void carlistList(final int id) {
-
+/*
         List<Car> LisrOfcars;
         new AsyncTask<Void, Void, List<Car>>() {
 
@@ -199,7 +198,7 @@ public class Profile extends Fragment implements View.OnClickListener {
             protected void onPostExecute(List<CarReserve> reserves) {
                 freeCar(car, id);
             }
-        }.execute();
+        }.execute();*/
 
     }
 
