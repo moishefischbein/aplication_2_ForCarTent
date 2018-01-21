@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.moish.aplication_2_forCarRent.R;
 import com.example.moish.aplication_2_forCarRent.model.backend.DBManagerFactory;
 import com.example.moish.aplication_2_forCarRent.model.backend.Functions;
+import com.example.moish.aplication_2_forCarRent.model.entities.Car;
 import com.example.moish.aplication_2_forCarRent.model.entities.CarReserve;
 
 import java.util.Calendar;
@@ -75,7 +76,7 @@ public class Profile extends Fragment implements View.OnClickListener {
                     String x = currentHour();
                     hour.setText(" " + x);
                     int y = Integer.parseInt(_id.getText().toString());
-                    reciveList(y);
+                    reserveList(y);
 
                     Start_kilometers.setVisibility(View.VISIBLE);
                     Total_kilometers.setVisibility(View.VISIBLE);
@@ -140,7 +141,7 @@ public class Profile extends Fragment implements View.OnClickListener {
     }
 
 
-    void reciveList(final int id) {
+    void reserveList(final int id) {
 
         List<CarReserve> LisrOfReserve;
         new AsyncTask<Void, Void, List<CarReserve>>() {
@@ -156,7 +157,7 @@ public class Profile extends Fragment implements View.OnClickListener {
 
             @Override
             protected void onPostExecute(List<CarReserve> reserves) {
-                TotalToPay(reserves,id);
+                TotalToPay(reserves, id);
             }
         }.execute();
 
@@ -174,11 +175,44 @@ public class Profile extends Fragment implements View.OnClickListener {
 
         }
         Start_kilometers.setText("Kilometers in the beggining: " + startKilometers);
-        Total_kilometers.setText("Kilometers in the end: " + (Integer.parseInt(kilometrage.getText().toString())-startKilometers));
-       // int km = Integer.parseInt(Total_kilometers.getText().toString());
-       // km *= 5.5;
-        TotalToPay.setText("Total To Pay: " + (Integer.parseInt(kilometrage.getText().toString())-startKilometers) * 5.5 + "$") ;
+        Total_kilometers.setText("Kilometers in the end: " + (Integer.parseInt(kilometrage.getText().toString()) - startKilometers));
+        TotalToPay.setText("Total To Pay: " + (Integer.parseInt(kilometrage.getText().toString()) - startKilometers) * 5.5 + "$");
 
     }
-}
 
+
+    void carlistList(final int id) {
+
+        List<Car> LisrOfcars;
+        new AsyncTask<Void, Void, List<Car>>() {
+
+            List<Car> car;
+
+
+            @Override
+            protected List<Car> doInBackground(Void... voids) {
+                car = DBManagerFactory.getManager().getCar();
+                return car;
+            }
+
+          //  @Override
+            protected void onPostExecute(List<CarReserve> reserves) {
+                freeCar(car, id);
+            }
+        }.execute();
+
+    }
+
+
+    void freeCar(List<Car> LisrOfcars, int id) {
+        for (Car car : LisrOfcars) {
+            if (car.getCarNumber_id() == id) {
+              //  startKilometers = reserve.getStartKilometers();
+                break;
+            }
+        }
+
+
+    }
+
+}
