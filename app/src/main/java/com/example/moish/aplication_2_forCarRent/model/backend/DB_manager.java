@@ -22,7 +22,7 @@ public interface DB_manager {
 
     long addCar(ContentValues car);
     boolean removeCar(long id);
-    int updateCar( ContentValues values);
+    long updateCar(ContentValues values);
     List<Car> getCar();
     public List<Car> getFreeCarOfBranch(Branch branch);
 

@@ -16,6 +16,16 @@
     <string name="add_client">ADD CLIENT</string>
     <string name="email">email</string>
 
+    <string name="Finish">FINISH</string>
+    <string name="hour">hour</string>
+
+    <string name="kilometers_in_the_end">kilometers in the end</string>
+
+
+    <string name="End_kilometers">Total kilometers</string>
+    <string name="Start_kilometers">Start kilometers</string>
+    <string name="TotalToPay">Total to pay:</string>
+
     <string name="city">city</string>
     <string name="street">street</string>
     <string name="adress_number">adress number</string>

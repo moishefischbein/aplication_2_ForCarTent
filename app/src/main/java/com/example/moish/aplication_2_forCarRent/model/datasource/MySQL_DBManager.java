@@ -179,7 +179,7 @@ public class MySQL_DBManager implements DB_manager {
     }
 
     @Override
-    public int updateCar( ContentValues values) {
+    public long updateCar(ContentValues values) {
 
 
         try {
@@ -276,6 +276,12 @@ public class MySQL_DBManager implements DB_manager {
     @Override
     public boolean updateCarReserve(ContentValues values) {
         return false;
+
+
+
+
+
+
     }
 
     @Override

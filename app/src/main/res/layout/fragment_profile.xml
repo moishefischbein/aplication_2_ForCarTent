@@ -7,16 +7,73 @@
     <!-- TODO: Update blank fragment layout -->
 
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="264dp"
-        android:layout_height="205dp" />
+
+    <EditText
+        android:id="@+id/Start_kilometers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_gravity="top"
+        android:visibility="gone"/>
+        android:hint="@string/Start_kilometers"
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/End_kilometers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="top"
+        android:visibility="gone"/>
+        android:hint="@string/End_kilometers"
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/TotalToPay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:visibility="gone"/>
+        android:layout_gravity="top"
+        android:hint="@string/TotalToPay"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/hour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:layout_gravity="top"
+        android:hint="@string/hour"
+        android:visibility="gone"/>
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/kilometers_EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_gravity="center"
+        android:hint="@string/kilometers_in_the_end"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/IdEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="15"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:hint="@string/id"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/ButtomFinish"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:text="@string/Finish"
+        android:layout_marginTop="90dp"/>
+
+
 
 </FrameLayout>
