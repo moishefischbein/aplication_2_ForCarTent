@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,15 +37,22 @@ import static com.example.moish.aplication_2_forCarRent.R.id.reserveIDResult;
  * Created by moish on 17/01/2018.
  */
 
-public class All_Branches extends Fragment implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
+public class All_Branches extends Fragment implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, View.OnClickListener {
 
-    View view;
-    Spinner sp;
+    private View view;
+    private Spinner sp;
+    private EditText clientIdEditText;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_all_branches, container, false);
+
+        Button confirm;
+        confirm = (Button) view.findViewById(R.id.confirm_button);
+        confirm.setOnClickListener(this);
+
+        clientIdEditText = (EditText)view.findViewById(idClientResult);
 
         sp = (Spinner) view.findViewById(R.id.fragment_simpleSpinner);
         sp.setOnItemSelectedListener(this);
@@ -88,6 +97,8 @@ public class All_Branches extends Fragment implements AdapterView.OnItemSelected
 
         final Branch branch = (Branch) adapterView.getSelectedItem();
 
+        fulfillDetailsBox(branch);
+
         new AsyncTask<Void, Void, List<Car>>(){
 
             List<Car> cars;
@@ -105,6 +116,25 @@ public class All_Branches extends Fragment implements AdapterView.OnItemSelected
         }.execute();
 
    }
+
+    private void fulfillDetailsBox(Branch branch){
+
+        TextView city;
+        TextView street;
+        TextView addressNumber;
+        TextView parkingAvailable;
+
+        city = (TextView) view.findViewById(R.id.city);
+        street = (TextView) view.findViewById(R.id.street);
+        addressNumber = (TextView) view.findViewById(R.id.addressNumber);
+        parkingAvailable = (TextView) view.findViewById(R.id.parkingAvailable);
+
+        city.setText("City:" + branch.getCity());
+        street.setText("Street: "+branch.getStreet());
+        addressNumber.setText("Address Number: "+branch.getAdressNumber());
+        parkingAvailable.setText("Parking available: " + branch.getNumberOfParkingAvailable());
+    }
+
 
     private void initItemByListView(List<Car> freeCars){
 
@@ -142,21 +172,21 @@ public class All_Branches extends Fragment implements AdapterView.OnItemSelected
 
             @Override
             protected void onPostExecute(List<CarReserve> reserves) {
-                isIdDefined(reserves, reserveID, car);
+                isReserveIdDefined(reserves, reserveID, car);
             }
         }.execute();
 
 
     }
 
-    public void isIdDefined(List<CarReserve> reserves, int reserveID, Car car){
+    public void isReserveIdDefined(List<CarReserve> reserves, int reserveID, Car car){
 
         for (CarReserve cr: reserves) {
 
             if(cr.getReserveNumber_id() == reserveID){
                 Random r = new Random();
                 reserveID = r.nextInt(2000000);
-                isIdDefined(reserves,reserveID, car);
+                isReserveIdDefined(reserves,reserveID, car);
                 break;
             }
         }
@@ -167,7 +197,6 @@ public class All_Branches extends Fragment implements AdapterView.OnItemSelected
     public void createReserve(final int reserveID, Car car){
 
         final TextView reserveIDTextView = (TextView) view.findViewById(reserveIDResult);
-        EditText clientIdEditText = (EditText)view.findViewById(idClientResult);
         String currentTime = Calendar.getInstance().getTime().toString();
 
         int idClient = Integer.parseInt(clientIdEditText.getText().toString());
@@ -200,4 +229,26 @@ public class All_Branches extends Fragment implements AdapterView.OnItemSelected
         }.execute();
 
     }
+
+    @Override
+    public void onClick(View view) {
+
+        int idClient = Integer.parseInt(clientIdEditText.getText().toString());
+        LinearLayout contents;
+        contents = (LinearLayout) this.view.findViewById(R.id.contentAllBranches);
+        if(view.getId() == R.id.confirm_button){
+            if(verifyIfIdIsCorrect(idClient)) {
+                Toast.makeText(getContext(),"Your id is correct", Toast.LENGTH_LONG).show();
+                contents.setVisibility(View.VISIBLE);
+            }
+            else
+                Toast.makeText(getContext(),"Your id is wrong", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public boolean verifyIfIdIsCorrect(int idClient){
+        return true;
+    }
+
+
 }
