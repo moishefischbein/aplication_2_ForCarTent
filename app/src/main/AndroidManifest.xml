@@ -13,12 +13,37 @@
             android:name="com.example.moish.aplication_2_forCarRent.controller.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
+        <receiver
+            android:name=".model.backend.MyReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_LOW" />
+                <action android:name="com.example.moish.aplication_2_forCarRent.UPDATE" />
+            </intent-filter>
+        </receiver>
+            <service
+                android:name=".model.backend.MyService"
+                android:enabled="true"
+                android:exported="true">
+                <intent-filter>
+                    <action android:name="com.example.moish.aplication_2_forCarRent.SERVICE_UPDATE" />
+                </intent-filter>
+            </service>
+
+
+
+
+
     </application>
 
 </manifest>

@@ -135,8 +135,8 @@ public class Profile extends Fragment implements View.OnClickListener {
     }
 
     String currentHour() {
-
-        String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+        String mydate = Calendar.getInstance().getTime().toString();
+       // String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
         return mydate;
     }
 
@@ -176,12 +176,13 @@ public class Profile extends Fragment implements View.OnClickListener {
         Start_kilometers.setText("Kilometers in the beggining: " + startKilometers);
         Total_kilometers.setText("Kilometers in the end: " + (Integer.parseInt(kilometrage.getText().toString()) - startKilometers));
         TotalToPay.setText("Total To Pay: " + (Integer.parseInt(kilometrage.getText().toString()) - startKilometers) * 5.5 + "$");
+        carlistList(id);
 
     }
 
 
     void carlistList(final int id) {
-/*
+
         List<Car> LisrOfcars;
         new AsyncTask<Void, Void, List<Car>>() {
 
@@ -191,6 +192,7 @@ public class Profile extends Fragment implements View.OnClickListener {
             @Override
             protected List<Car> doInBackground(Void... voids) {
                 car = DBManagerFactory.getManager().getCar();
+                freeCar(car, id);
                 return car;
             }
 
@@ -198,7 +200,7 @@ public class Profile extends Fragment implements View.OnClickListener {
             protected void onPostExecute(List<CarReserve> reserves) {
                 freeCar(car, id);
             }
-        }.execute();*/
+        }.execute();
 
     }
 
@@ -206,7 +208,8 @@ public class Profile extends Fragment implements View.OnClickListener {
     void freeCar(List<Car> LisrOfcars, int id) {
         for (Car car : LisrOfcars) {
             if (car.getCarNumber_id() == id) {
-              //  startKilometers = reserve.getStartKilometers();
+                ContentValues value = new ContentValues(Functions.carToContentValues(car));
+                DBManagerFactory.getManager().addFreeCars(value);
                 break;
             }
         }

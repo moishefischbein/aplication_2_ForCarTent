@@ -37,6 +37,7 @@ public interface DB_manager {
     List<CarModel> getCarModels();
 
     public boolean isUpdate();
+    public void addFreeCars(ContentValues values);
 
 
 

@@ -244,11 +244,7 @@ public class MySQL_DBManager implements DB_manager {
     public long addCarReserve(ContentValues values) {
         try {
             String result = PHPtools.POST(WEB_URL + "/addReserve.php", values);
-
-        //    values.put(Functions.CarConst.CAR_NUMBER, _id.getText().toString());
-            ContentValues v = new ContentValues();
-            v.put(Functions.CarConst.CAR_NUMBER,Integer.toString((Functions.contentValuesToCarReserve(values).getCarNumber())));
-            String resultRemove = PHPtools.POST(WEB_URL + "/deleteFreeCar.php", v);
+            String resultRemove = PHPtools.POST(WEB_URL + "/deleteFreeCar.php", values);
 
             if(result.length() > 10){
                 printLog(result);
@@ -271,6 +267,23 @@ public class MySQL_DBManager implements DB_manager {
             return -1;
         }
     }
+//..............................................................................
+    public void addFreeCars(ContentValues values) {
+        try {
+            String resultRemove = PHPtools.POST(WEB_URL + "/addFreeCars.php", values);
+
+
+         /*   long id = Long.parseLong(resultRemove);
+            if (id > 0)
+                SetUpdate();
+            printLog("addReserve:\n" + resultRemove);
+            return id;*/
+        } catch (IOException e)
+        {
+            printLog("addReserve Exception:\n" + e);
+            // return -1;
+        }
+    }
 
     @Override
     public boolean removeCarReserve(int id) {
@@ -280,12 +293,6 @@ public class MySQL_DBManager implements DB_manager {
     @Override
     public boolean updateCarReserve(ContentValues values) {
         return false;
-
-
-
-
-
-
     }
 
     @Override
