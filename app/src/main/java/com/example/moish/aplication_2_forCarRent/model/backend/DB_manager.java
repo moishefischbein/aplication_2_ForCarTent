@@ -28,7 +28,7 @@ public interface DB_manager {
 
     long addCarReserve(ContentValues carReserve);
     boolean removeCarReserve(int id);
-    boolean updateCarReserve( ContentValues values);
+    void updateCarReserve( ContentValues values);
     List<CarReserve> getCarReserve();
 
     long addCarModel(ContentValues carModel);

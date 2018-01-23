@@ -65,6 +65,9 @@
     <string name="ok_button">Confirm</string>
     <string name="id_request">Please, insert your ID to make a reserve</string>
 
+    <string name="TakeGo">Take and Go</string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

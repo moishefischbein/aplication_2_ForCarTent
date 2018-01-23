@@ -1,6 +1,8 @@
 package com.example.moish.aplication_2_forCarRent.model.datasource;
 
 import android.content.ContentValues;
+import android.widget.Toast;
+
 import com.example.moish.aplication_2_forCarRent.model.entities.*;
 import com.example.moish.aplication_2_forCarRent.model.backend.DB_manager;
 import com.example.moish.aplication_2_forCarRent.model.backend.Functions;
@@ -291,8 +293,24 @@ public class MySQL_DBManager implements DB_manager {
     }
 
     @Override
-    public boolean updateCarReserve(ContentValues values) {
-        return false;
+    public void updateCarReserve(ContentValues values) {
+       // Toast.makeText(getContext(), "The kilometer was update: ", Toast.LENGTH_LONG).show();
+        try {
+            String result = PHPtools.POST(WEB_URL + "updateReserve.php", values);
+            if(result.length() > 10){
+                printLog( result);
+               // return -1;
+            }
+            int id = Integer.parseInt(result);
+            if (id > 0)
+                SetUpdate();
+            printLog("addCar:\n" + result);
+           // return id;
+        } catch (IOException e)
+        {
+            printLog("addCar Exception:\n" + e);
+            //return -1;
+        }
     }
 
     @Override

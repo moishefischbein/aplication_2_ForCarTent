@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.moish.aplication_2_forCarRent.R;
@@ -35,21 +35,27 @@ public class Profile extends Fragment implements View.OnClickListener {
 
 
     private View mView;
+
+
     private EditText _id;
     private EditText Start_kilometers;
     private EditText Total_kilometers;
     private EditText TotalToPay;
     private EditText kilometrage;
     private EditText hour;
+    private EditText fuel;
     private Button button_Fisnish;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.fragment_profile, container, false);
+
         _id = (EditText) mView.findViewById(R.id.IdEditText);
         Start_kilometers = (EditText) mView.findViewById(R.id.Start_kilometers);
+        fuel = (EditText) mView.findViewById((R.id.liters_of_fuel));
         Total_kilometers = (EditText) mView.findViewById(R.id.End_kilometers);
         TotalToPay = (EditText) mView.findViewById(R.id.TotalToPay);
         hour = (EditText) mView.findViewById(R.id.hour);
@@ -76,7 +82,7 @@ public class Profile extends Fragment implements View.OnClickListener {
                     String x = currentHour();
                     hour.setText(" " + x);
                     int y = Integer.parseInt(_id.getText().toString());
-                    reserveList(y);
+                   // reserveList(y);
 
                     Start_kilometers.setVisibility(View.VISIBLE);
                     Total_kilometers.setVisibility(View.VISIBLE);
@@ -101,11 +107,6 @@ public class Profile extends Fragment implements View.OnClickListener {
             values.put(Functions.CarConst.FIXED_BRANCH, 22);
 
             new AsyncTask<Void, Void, Long>() {
-               /* @Override
-                protected void onPostExecute(Long aLong) {
-                    Toast.makeText(getBaseContext(), "ID: " + aLong, Toast.LENGTH_LONG).show();
-                    Log.d("client", values.toString());
-                }*/
 
                 @Override
                 protected Long doInBackground(Void... voids) {
@@ -119,6 +120,35 @@ public class Profile extends Fragment implements View.OnClickListener {
         }
 
     }
+
+    //..............................................................update the isOpen from contracts....................
+    private void closeTheIsOpened(CarReserve reserve2) {
+
+        final ContentValues values = new ContentValues();
+        try {
+            long id = Long.valueOf(_id.getText().toString());
+
+            reserve2.setOpened(0);
+            values.put(Functions.CarReserveConst.RESERVE_NUMBER, Integer.toString(reserve2.getReserveNumber_id()));
+            values.put(Functions.CarReserveConst.IS_OPENED, Integer.toString(reserve2.isOpened()));
+
+
+            new AsyncTask<Object, Object, Void>() {
+
+                @Override
+                protected Void doInBackground(Object... voids) {
+                    DBManagerFactory.getManager().updateCarReserve(values);
+                    return null;
+                }
+            }.execute();
+        } catch (Exception e) {
+            e.toString();
+        } finally {
+            //this.finish();
+        }
+
+    }
+
 
 
     //to verify if all fieldss are fill in
@@ -143,12 +173,10 @@ public class Profile extends Fragment implements View.OnClickListener {
 
     void reserveList(final int id) {
 
-        List<CarReserve> LisrOfReserve;
+
         new AsyncTask<Void, Void, List<CarReserve>>() {
 
             List<CarReserve> reserves;
-
-
             @Override
             protected List<CarReserve> doInBackground(Void... voids) {
                 reserves = DBManagerFactory.getManager().getCarReserve();
@@ -164,57 +192,111 @@ public class Profile extends Fragment implements View.OnClickListener {
 
     private void TotalToPay(List<CarReserve> reserves, int id) {
 
+        CarReserve reserve2=null;
         double startKilometers = 0;
         for (CarReserve reserve : reserves) {
             if (reserve.getCarNumber() == id) {
+                reserve2=reserve;
                 startKilometers = reserve.getStartKilometers();
                 break;
             }
 
 
         }
-        Start_kilometers.setText("Kilometers in the beggining: " + startKilometers);
-        Total_kilometers.setText("Kilometers in the end: " + (Integer.parseInt(kilometrage.getText().toString()) - startKilometers));
-        TotalToPay.setText("Total To Pay: " + (Integer.parseInt(kilometrage.getText().toString()) - startKilometers) * 5.5 + "$");
-        carlistList(id);
+
+        if(reserve2.isOpened()==1) {
+
+            //close the contract
+            closeTheIsOpened(reserve2);
+
+            Start_kilometers.setText("Kilometers in the beggining: " + startKilometers);
+            Total_kilometers.setText("Kilometers in the end: " + (Integer.parseInt(kilometrage.getText().toString()) - startKilometers));
+            int f = (Integer.parseInt(fuel.getText().toString()));
+            TotalToPay.setText("Total To Pay: " + (((Integer.parseInt(kilometrage.getText().toString()) - startKilometers) * 5.5) - (f * 2.5)) + "$");
+            carList(id);
+
+        }
+    }
+
+
+    void carList(final int id) {
+
+        List<Car> LisrOfcars;
+
+        new AsyncTask<Void, Void, List<Car>>(){
+
+            List<Car> cars;
+
+            @Override
+            protected List<Car> doInBackground(Void... voids) {
+                cars = DBManagerFactory.getManager().getCar();
+                return cars;
+            }
+
+            @Override
+            protected void onPostExecute(List<Car> cars) {
+                freeCar(cars, id);
+            }
+        }.execute();
+
 
     }
 
 
-    void carlistList(final int id) {
-
-        List<Car> LisrOfcars;
-        new AsyncTask<Void, Void, List<Car>>() {
-
-            List<Car> car;
+    void freeCar(List<Car> cars, int id) {
 
 
+        Car newCar = null;
+
+        for (Car car : cars) {
+            if (car.getCarNumber_id() == id) {
+                fulfillDetailsBox(car);
+                newCar = car;
+                break;
+            }
+        }
+
+        ContentValues value = new ContentValues(Functions.carToContentValues(newCar));
+        addToFreeCars(value);
+    }
+
+    public void addToFreeCars(final ContentValues value){
+
+        new AsyncTask<Void, Void, ContentValues>(){
             @Override
-            protected List<Car> doInBackground(Void... voids) {
-                car = DBManagerFactory.getManager().getCar();
-                freeCar(car, id);
-                return car;
+            protected ContentValues doInBackground(Void... voids) {
+                DBManagerFactory.getManager().addFreeCars(value);
+                return value;
             }
 
-          //  @Override
-            protected void onPostExecute(List<CarReserve> reserves) {
-                freeCar(car, id);
+            @Override
+            protected void onPostExecute(ContentValues value){
+
             }
         }.execute();
 
     }
 
 
-    void freeCar(List<Car> LisrOfcars, int id) {
-        for (Car car : LisrOfcars) {
-            if (car.getCarNumber_id() == id) {
-                ContentValues value = new ContentValues(Functions.carToContentValues(car));
-                DBManagerFactory.getManager().addFreeCars(value);
-                break;
-            }
-        }
+    private void fulfillDetailsBox(Car car){
 
 
+        TextView fixedBranch;
+        TextView kilometerTraveled;
+        TextView model;
+
+        fixedBranch = (TextView) mView.findViewById(R.id.fixed);
+        kilometerTraveled = (TextView) mView.findViewById(R.id.km);
+        model = (TextView) mView.findViewById(R.id.mod);
+
+
+        fixedBranch.setText("Branch: " + car.getFixedBranch());
+        kilometerTraveled.setText("Kilometers traveled: " + car.getKilometersTraveled());//+ String.valueOf(car.getKilometersTraveled()));
+        model.setText("Model: " + car.getModel());//+ Integer.toString(car.getModel()));
     }
 
 }
+
+//
+//
+//
