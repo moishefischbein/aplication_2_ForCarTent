@@ -25,6 +25,7 @@ public class CarAdapter extends BaseAdapter{
         this.activity = activity;
     }
 
+
     @Override
     public int getCount() {
         return cars.size();

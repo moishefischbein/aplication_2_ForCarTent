@@ -74,6 +74,7 @@ public class All_Branches extends Fragment implements AdapterView.OnItemSelected
         getContext().stopService(new Intent(getContext(), MyService.class));
     }
 
+
     private void getListItems(){
 
         new AsyncTask<Void, Void, List<Branch>>(){

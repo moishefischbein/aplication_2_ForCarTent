@@ -1,18 +1,15 @@
 package com.example.moish.aplication_2_forCarRent.controller.fragments;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.moish.aplication_2_forCarRent.R;
 
@@ -65,7 +62,7 @@ public class Home extends Fragment implements View.OnClickListener  {
         if (v == call) {
             // Handle clicks for call
             String number = "12345678";
-            Intent intent = new Intent(Intent.ACTION_CALL);
+            Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:" +number));
             startActivity(intent);
         } else if (v == webS) {
@@ -83,6 +80,7 @@ public class Home extends Fragment implements View.OnClickListener  {
             // Handle clicks for mail
            // public void composeEmail(String[] addresses, String subject) {
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.addCategory(Intent.CATEGORY_DEFAULT);
                 intent.setData(Uri.parse("mailto:")); // only email apps should handle this
                 intent.putExtra(Intent.EXTRA_EMAIL, "ghjg");
                 intent.putExtra(Intent.EXTRA_SUBJECT, "jjbb");
