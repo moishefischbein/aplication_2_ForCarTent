@@ -2,6 +2,7 @@ package com.example.moish.aplication_2_forCarRent.controller.fragments;
 
 import android.app.Fragment;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ import com.example.moish.aplication_2_forCarRent.model.adapter.BranchAdapter;
 import com.example.moish.aplication_2_forCarRent.model.adapter.CarAdapter;
 import com.example.moish.aplication_2_forCarRent.model.backend.DBManagerFactory;
 import com.example.moish.aplication_2_forCarRent.model.backend.Functions;
+import com.example.moish.aplication_2_forCarRent.model.backend.MyService;
 import com.example.moish.aplication_2_forCarRent.model.entities.Branch;
 import com.example.moish.aplication_2_forCarRent.model.entities.Car;
 import com.example.moish.aplication_2_forCarRent.model.entities.CarReserve;
@@ -58,8 +60,18 @@ public class All_Branches extends Fragment implements AdapterView.OnItemSelected
         sp.setOnItemSelectedListener(this);
 
         getListItems();
+        Intent myIntent = new Intent(getContext(), MyService.class);
+        myIntent.putExtra("package path", getContext().getPackageName());
+        myIntent.putExtra("class path", All_Branches.class.toString());
+        getContext().startService(myIntent);
 
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getContext().stopService(new Intent(getContext(), MyService.class));
     }
 
     private void getListItems(){
@@ -138,6 +150,9 @@ public class All_Branches extends Fragment implements AdapterView.OnItemSelected
 
     private void initItemByListView(List<Car> freeCars){
 
+        if(freeCars.size() == 0){
+            Toast.makeText(getContext(),"There is no availabre cars in the moment in this branch", Toast.LENGTH_LONG).show();
+        }
         ListView lv = (ListView) view.findViewById(R.id.freeCars);
         lv.setOnItemClickListener(this);
 

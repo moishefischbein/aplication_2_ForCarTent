@@ -59,8 +59,8 @@ public class CarAdapter extends BaseAdapter{
             TextView ide = (TextView) v.findViewById(R.id.itemId);
             TextView name = (TextView) v.findViewById(R.id.itemName);
 
-            name.setText(Integer.toString(car.getModel()));
-            ide.setText(Integer.toString(car.getCarNumber_id()));
+            name.setText("Model: " + Integer.toString(car.getModel()));
+            ide.setText("Car Code: "+ Integer.toString(car.getCarNumber_id()));
 
 
         }catch (Exception ex){ex.toString();}

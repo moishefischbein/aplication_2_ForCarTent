@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.moish.aplication_2_forCarRent.controller.fragments.All_Branches;
+
 public class MyReceiver extends BroadcastReceiver {
     public MyReceiver() {
     }
@@ -19,6 +21,12 @@ public class MyReceiver extends BroadcastReceiver {
 
         Toast.makeText(context,intent.getAction(), Toast.LENGTH_LONG).show();
 
+        String pathName = intent.getStringExtra("package name");
+        String className = intent.getStringExtra("class name");
+
+        if(className.equals(All_Branches.class.toString())){
+            
+        }
 
     //    throw new UnsupportedOperationException("Not yet implemented");
     }

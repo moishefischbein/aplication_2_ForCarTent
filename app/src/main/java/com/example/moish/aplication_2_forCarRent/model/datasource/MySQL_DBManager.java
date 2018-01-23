@@ -327,8 +327,15 @@ public class MySQL_DBManager implements DB_manager {
     }
 
     @Override
-    public boolean isUpdate() {
-        return false;
+    public boolean isUpdate(int actualNumberOfCars) {
+
+        List<Car> freeCars = getFreeCars();
+        int newNumberOfCars = freeCars.size();
+
+        if(newNumberOfCars != actualNumberOfCars)
+            return false;
+
+        return true;
     }
 
 
@@ -338,6 +345,8 @@ public class MySQL_DBManager implements DB_manager {
         List<Car> result = new ArrayList<Car>();
         try {
             String str = PHPtools.GET(WEB_URL + "FreeCars.php");
+            if(str.equals("0 results"))
+                return result;
             JSONArray array = new JSONObject(str).getJSONArray("FreeCars");
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
