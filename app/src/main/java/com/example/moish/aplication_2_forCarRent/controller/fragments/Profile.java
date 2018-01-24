@@ -82,7 +82,7 @@ public class Profile extends Fragment implements View.OnClickListener {
                     String x = currentHour();
                     hour.setText(" " + x);
                     int y = Integer.parseInt(_id.getText().toString());
-                   // reserveList(y);
+                    reserveList(y);
 
                     Start_kilometers.setVisibility(View.VISIBLE);
                     Total_kilometers.setVisibility(View.VISIBLE);
@@ -100,6 +100,24 @@ public class Profile extends Fragment implements View.OnClickListener {
         try {
             long id = Long.valueOf(_id.getText().toString());
 
+             //...
+            int idd =Integer.parseInt( _id.getText().toString());
+            int idCar=0;
+            List<CarReserve> reserves = DBManagerFactory.getManager().getCarReserve();
+            for(CarReserve reserve:reserves)
+            {
+              if(reserve.getClientNumber()==idd)
+              {
+                 idCar = reserve.getCarNumber();
+                  Toast.makeText(getContext(), "id car: "+idCar, Toast.LENGTH_LONG).show();
+              }
+            }
+
+            //...
+            //..
+            String string_id = Integer.toString(idCar);
+
+//..
 
             values.put(Functions.CarConst.CAR_NUMBER, _id.getText().toString());
             values.put(Functions.CarConst.KILOMETERS_TRAVELED, kilometrage.getText().toString());
@@ -184,13 +202,16 @@ public class Profile extends Fragment implements View.OnClickListener {
             }
 
             @Override
-            protected void onPostExecute(List<CarReserve> reserves) {
+            protected void onPostExecute(List<CarReserve> reserves)
+            {
+
                 TotalToPay(reserves, id);
             }
         }.execute();
     }
 
     private void TotalToPay(List<CarReserve> reserves, int id) {
+
 
         CarReserve reserve2=null;
         double startKilometers = 0;
@@ -204,8 +225,8 @@ public class Profile extends Fragment implements View.OnClickListener {
 
         }
 
-        if(reserve2.isOpened()==1) {
-
+        if(reserve2.isOpened()==0) {
+            Toast.makeText(getContext(), "is opened: "+reserve2.getCarNumber(), Toast.LENGTH_LONG).show();
             //close the contract
             closeTheIsOpened(reserve2);
 
@@ -215,6 +236,9 @@ public class Profile extends Fragment implements View.OnClickListener {
             TotalToPay.setText("Total To Pay: " + (((Integer.parseInt(kilometrage.getText().toString()) - startKilometers) * 5.5) - (f * 2.5)) + "$");
             carList(id);
 
+       }
+       else {
+            Toast.makeText(getContext(), "The reserve was closed. ", Toast.LENGTH_LONG).show();
         }
     }
 
