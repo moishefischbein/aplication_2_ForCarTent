@@ -16,14 +16,22 @@ public class CarFilter extends Filter {
 
     FilterResults results = new FilterResults();
     List<Car> freeCars = new ArrayList<Car>();
+    List<Car> freeCarsOriginals = new ArrayList<Car>();
     CarAdapter carAdapter;
 
     public CarFilter(List<Car> cars, CarAdapter adapter) {
         super();
         freeCars = cars;
+        addToFreeOriginalCars(cars);
         carAdapter = adapter;
+
     }
 
+    public void addToFreeOriginalCars(List<Car> cars){
+        for (Car c:cars) {
+            freeCarsOriginals.add(c);
+        }
+    }
 
     @Override
     protected FilterResults performFiltering(final CharSequence constraint) {
@@ -31,13 +39,13 @@ public class CarFilter extends Filter {
         // We implement here the filter logic
         if (constraint == null || constraint.length() == 0) {
             // No filter implemented we return all the list
-            results.values = freeCars;
-            results.count = freeCars.size();
+            results.values = freeCarsOriginals;
+            results.count = freeCarsOriginals.size();
         } else {
             // We perform filtering operation
             List<Car> nCars = new ArrayList<Car>();
 
-            for (Car c : freeCars) {
+            for (Car c : freeCarsOriginals) {
                 if (String.valueOf(c.getModel()).startsWith(constraint.toString()))
                     nCars.add(c);
             }
@@ -53,8 +61,11 @@ public class CarFilter extends Filter {
         if (results.count == 0)
             carAdapter.notifyDataSetInvalidated();
         else {
-            freeCars.removeAll(freeCars);
-            freeCars = (List<Car>) results.values;
+
+            freeCars.clear();
+            for(Car c : (List<Car>) results.values)
+                freeCars.add(c);
+
             carAdapter.notifyDataSetChanged();
         }
     }

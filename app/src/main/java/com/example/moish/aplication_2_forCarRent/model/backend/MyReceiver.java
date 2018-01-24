@@ -1,3 +1,4 @@
+/*
 package com.example.moish.aplication_2_forCarRent.model.backend;
 
 import android.content.BroadcastReceiver;
@@ -26,3 +27,4 @@ public class MyReceiver extends BroadcastReceiver {
     //    throw new UnsupportedOperationException("Not yet implemented");
     }
 }
+*/

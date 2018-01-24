@@ -30,6 +30,7 @@ public class CarAdapter extends BaseAdapter implements Filterable{
     }
 
 
+    @Override
     public Filter getFilter() {
         if (carFilter == null)
             carFilter = new CarFilter((List<Car>)cars, (CarAdapter) this);

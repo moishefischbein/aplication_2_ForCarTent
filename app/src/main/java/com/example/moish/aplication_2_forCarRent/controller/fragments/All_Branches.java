@@ -1,11 +1,15 @@
 package com.example.moish.aplication_2_forCarRent.controller.fragments;
 
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +48,7 @@ public class All_Branches extends Fragment implements AdapterView.OnItemSelected
     private View view;
     private Spinner sp;
     private EditText clientIdEditText;
-
+    static AdapterView adapterView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -74,6 +78,17 @@ public class All_Branches extends Fragment implements AdapterView.OnItemSelected
         getContext().stopService(new Intent(getContext(), MyService.class));
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(myReceiver, new IntentFilter("com.example.moish.aplication_2_forCarRent.UPDATE"));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(myReceiver);
+    }
 
     private void getListItems(){
 
@@ -108,6 +123,7 @@ public class All_Branches extends Fragment implements AdapterView.OnItemSelected
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+        this.adapterView = adapterView;
         final Branch branch = (Branch) adapterView.getSelectedItem();
 
         fulfillDetailsBox(branch);
@@ -266,5 +282,37 @@ public class All_Branches extends Fragment implements AdapterView.OnItemSelected
         return true;
     }
 
+    //-----------------------Receiver-----------------------------------------//
+    BroadcastReceiver myReceiver = new BroadcastReceiver() {
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // TODO: This method is called when the BroadcastReceiver is receiving
+            // an Intent broadcast.
+
+            Log.d("my service" , "onReceive");
+
+            Toast.makeText(context,"Changes happened, please, refresh your page", Toast.LENGTH_LONG).show();
+
+            final Branch branch = (Branch) adapterView.getSelectedItem();
+
+            new AsyncTask<Void, Void, List<Car>>(){
+
+                List<Car> cars;
+
+                @Override
+                protected List<Car> doInBackground(Void... voids) {
+                    cars = DBManagerFactory.getManager().getFreeCarOfBranch(branch);
+                    return cars;
+                }
+
+                @Override
+                protected void onPostExecute(List<Car> cars) {
+                    initItemByListView(cars);
+                }
+            }.execute();
+
+        }
+    };
+//----------------------------------------------------------------------------------------------//
 }
