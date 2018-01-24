@@ -100,7 +100,7 @@ public class Profile extends Fragment implements View.OnClickListener {
         try {
             long id = Long.valueOf(_id.getText().toString());
 
-             //...
+          /*   //...
             int idd =Integer.parseInt( _id.getText().toString());
             int idCar=0;
             List<CarReserve> reserves = DBManagerFactory.getManager().getCarReserve();
@@ -115,7 +115,7 @@ public class Profile extends Fragment implements View.OnClickListener {
 
             //...
             //..
-            String string_id = Integer.toString(idCar);
+            String string_id = Integer.toString(idCar);*/
 
 //..
 
