@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.moish.aplication_2_forCarRent.R;
+import com.example.moish.aplication_2_forCarRent.model.backend.CarFilter;
 import com.example.moish.aplication_2_forCarRent.model.entities.Car;
 
 import java.util.List;
@@ -15,16 +18,22 @@ import java.util.List;
  * Created by moish on 09/12/2017.
  */
 
-public class CarAdapter extends BaseAdapter{
+public class CarAdapter extends BaseAdapter implements Filterable{
 
     private final List<Car> cars;
     private final Activity activity;
+    CarFilter carFilter;
 
     public CarAdapter(List<Car> cars, Activity activity) {
         this.cars = cars;
         this.activity = activity;
     }
 
+
+    public Filter getFilter() {
+        if (carFilter == null)
+            carFilter = new CarFilter((List<Car>)cars, (CarAdapter) this);
+        return carFilter; }
 
     @Override
     public int getCount() {
