@@ -86,15 +86,12 @@ public class AllFreeCars extends Fragment implements SearchView.OnQueryTextListe
     @Override
     public boolean onQueryTextChange(String newText) {
 
-        /*int count = 0;
-        while (adapter == null && count < 1000)
-            count++;*/
-
         if (adapter == null) {
 
             BadInternetDialog badInternetDialog = new BadInternetDialog();
             badInternetDialog.show(getFragmentManager(), "badInternet");
         }
+
         Toast.makeText(getContext(), newText, Toast.LENGTH_LONG).show();
         adapter.getFilter().filter(newText);
         adapter.notifyDataSetChanged();

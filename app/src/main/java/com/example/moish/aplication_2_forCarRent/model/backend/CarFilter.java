@@ -36,9 +36,10 @@ public class CarFilter extends Filter {
         } else {
             // We perform filtering operation
             List<Car> nCars = new ArrayList<Car>();
-
+            String model;
             for (Car c : freeCars) {
-                if (String.valueOf(c.getModel()).startsWith(constraint.toString()))
+                model = String.valueOf(c.getModel());
+                if (model.startsWith(constraint.toString()))
                     nCars.add(c);
             }
             results.values = nCars;
@@ -53,7 +54,7 @@ public class CarFilter extends Filter {
         if (results.count == 0)
             carAdapter.notifyDataSetInvalidated();
         else {
-            freeCars.removeAll(freeCars);
+            //freeCars.removeAll(freeCars);
             freeCars = (List<Car>) results.values;
             carAdapter.notifyDataSetChanged();
         }
