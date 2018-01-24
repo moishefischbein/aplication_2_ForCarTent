@@ -150,6 +150,8 @@ public class Profile extends Fragment implements View.OnClickListener {
             values.put(Functions.CarReserveConst.RESERVE_NUMBER, Integer.toString(reserve2.getReserveNumber_id()));
             values.put(Functions.CarReserveConst.IS_OPENED, Integer.toString(reserve2.isOpened()));
             values.put(Functions.CarReserveConst.RENT_END_DATE, currentHour());
+            values.put(Functions.CarReserveConst.END_KILOMETERS, kilometrage.getText().toString());
+
 
 
             new AsyncTask<Object, Object, Void>() {
