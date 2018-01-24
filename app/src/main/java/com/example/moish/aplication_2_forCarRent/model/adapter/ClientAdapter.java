@@ -48,24 +48,25 @@ public class ClientAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        View v = activity.getLayoutInflater()
-                .inflate(R.layout.item_row, viewGroup, false);
-
+        if(view == null) {
+            view = activity.getLayoutInflater()
+                    .inflate(R.layout.item_row, viewGroup, false);
+        }
         Client client = clients.get(i);
 
         try {
 
 
 
-            TextView ide = (TextView) v.findViewById(R.id.itemId);
-            TextView name = (TextView) v.findViewById(R.id.itemName);
+            TextView ide = (TextView) view.findViewById(R.id.itemId);
+            TextView name = (TextView) view.findViewById(R.id.itemName);
 
             name.setText(client.getFirstName() + " " + client.getLastName());
             ide.setText(Integer.toString(client.getId()));
             //ide.setText(client.getId());
 
         }catch (Exception ex){ex.toString();}
-            return v;
+            return view;
 
     }
     {
