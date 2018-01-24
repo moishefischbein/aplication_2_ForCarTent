@@ -43,24 +43,25 @@ public class BranchAdapter extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        View v = activity.getLayoutInflater()
-                .inflate(R.layout.item_row, viewGroup, false);
-
+        if(view == null) {
+            view = activity.getLayoutInflater()
+                    .inflate(R.layout.item_row, viewGroup, false);
+        }
         Branch branch = branchs.get(i);
 
         try {
 
 
 
-            TextView ide = (TextView) v.findViewById(R.id.itemId);
-            TextView name = (TextView) v.findViewById(R.id.itemName);
+            TextView ide = (TextView) view.findViewById(R.id.itemId);
+            TextView name = (TextView) view.findViewById(R.id.itemName);
 
             name.setText(branch.getCity() + " " + branch.getStreet());
             ide.setText(Integer.toString(branch.getBranchNumber_id()));
             //ide.setText(client.getId());
 
         }catch (Exception ex){ex.toString();}
-        return v;
+        return view;
 
     }
     {

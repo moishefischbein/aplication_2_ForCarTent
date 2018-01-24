@@ -55,27 +55,24 @@ public class CarAdapter extends BaseAdapter implements Filterable{
     public View getView(int i, View view, ViewGroup viewGroup) {
 
 
-        View v = activity.getLayoutInflater()
-                .inflate(R.layout.item_row, viewGroup, false);
-
-
-
+        if(view == null) {
+            view = activity.getLayoutInflater()
+                    .inflate(R.layout.item_row, viewGroup, false);
+        }
 
         Car car = cars.get(i);
 
         try {
 
-
-
-            TextView ide = (TextView) v.findViewById(R.id.itemId);
-            TextView name = (TextView) v.findViewById(R.id.itemName);
+            TextView ide = (TextView) view.findViewById(R.id.itemId);
+            TextView name = (TextView) view.findViewById(R.id.itemName);
 
             name.setText("Model: " + Integer.toString(car.getModel()));
             ide.setText("Car Code: "+ Integer.toString(car.getCarNumber_id()));
 
 
         }catch (Exception ex){ex.toString();}
-        return v;
+        return view;
 
     }
 

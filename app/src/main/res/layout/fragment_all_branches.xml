@@ -5,10 +5,15 @@
         tools:context="com.example.moish.aplication_2_forCarRent.controller.fragments.Home">
 
         <!-- TODO: Update blank fragment layout -->
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:scrollbars="vertical">
 
         <EditText
             android:id="@+id/idClientResult"
@@ -87,5 +92,5 @@
                 android:text=""/>
         </LinearLayout>
     </LinearLayout>
-
+  </ScrollView>
 </FrameLayout>
