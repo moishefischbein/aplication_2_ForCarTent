@@ -47,10 +47,6 @@ public class CarFilter extends Filter {
 
             for (Car c : freeCarsOriginals) {
                 if (String.valueOf(c.getModel()).startsWith(constraint.toString()))
-            String model;
-            for (Car c : freeCars) {
-                model = String.valueOf(c.getModel());
-                if (model.startsWith(constraint.toString()))
                     nCars.add(c);
             }
             results.values = nCars;
@@ -65,15 +61,10 @@ public class CarFilter extends Filter {
         if (results.count == 0)
             carAdapter.notifyDataSetInvalidated();
         else {
-
             freeCars.clear();
             for(Car c : (List<Car>) results.values)
                 freeCars.add(c);
 
-=======
-            //freeCars.removeAll(freeCars);
-            freeCars = (List<Car>) results.values;
->>>>>>> 88aa816451dbe3b6637f4ae79359775bcd939cb1
             carAdapter.notifyDataSetChanged();
         }
     }
