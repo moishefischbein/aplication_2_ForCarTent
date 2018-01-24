@@ -97,7 +97,7 @@ public class Profile extends Fragment implements View.OnClickListener {
                                     startTheFuctions();
                                 }
                             }
-                            if(isIdExist == false){
+                            if (isIdExist == false) {
                                 Toast.makeText(getContext(), "These Id car does not exist in the reserves.", Toast.LENGTH_LONG).show();
                             }
                         }
@@ -105,20 +105,14 @@ public class Profile extends Fragment implements View.OnClickListener {
                 }
         }
     }
-                    void startTheFuctions(){
 
-                        int y = Integer.parseInt(_id.getText().toString());
-                        reserveList(y);
+    void startTheFuctions() {
 
-
-
-
-                }
+        int y = Integer.parseInt(_id.getText().toString());
+        reserveList(y);
 
 
-
-
-
+    }
 
 
     private void EndReserve() {
@@ -169,10 +163,9 @@ public class Profile extends Fragment implements View.OnClickListener {
         } catch (Exception e) {
             e.toString();
         } finally {
-         }
+        }
 
     }
-
 
 
     //to verify if all fieldss are fill in
@@ -199,6 +192,7 @@ public class Profile extends Fragment implements View.OnClickListener {
         new AsyncTask<Void, Void, List<CarReserve>>() {
 
             List<CarReserve> reserves;
+
             @Override
             protected List<CarReserve> doInBackground(Void... voids) {
                 reserves = DBManagerFactory.getManager().getCarReserve();
@@ -206,8 +200,7 @@ public class Profile extends Fragment implements View.OnClickListener {
             }
 
             @Override
-            protected void onPostExecute(List<CarReserve> reserves)
-            {
+            protected void onPostExecute(List<CarReserve> reserves) {
                 TotalToPay(reserves, id);
             }
         }.execute();
@@ -216,42 +209,53 @@ public class Profile extends Fragment implements View.OnClickListener {
     private void TotalToPay(List<CarReserve> reserves, int id) {
 
 
-        CarReserve reserve2=null;
+        CarReserve reserve2 = null;
         double startKilometers = 0;
         for (CarReserve reserve : reserves) {
             if (reserve.getCarNumber() == id) {
-                reserve2=reserve;
+                reserve2 = reserve;
                 startKilometers = reserve.getStartKilometers();
                 break;
             }
 
 
         }
+        int f = (Integer.parseInt(fuel.getText().toString()));
 
-        if(reserve2.isOpened()==1) {
-            closeTheIsOpened(reserve2);
+        if (reserve2.isOpened() == 1) {
+            if (startKilometers > Integer.parseInt(kilometrage.getText().toString())) {
 
-            String x = currentHour();
-            hour.setText(" " + x);
+                Toast.makeText(getContext(), "Please, insert the correct end kilometers. ", Toast.LENGTH_LONG).show();
+            } else {
+                if (f < 0) {
+                    Toast.makeText(getContext(), "Please, insert the correct litersof fuel. ", Toast.LENGTH_LONG).show();
+                } else {
+                    closeTheIsOpened(reserve2);
 
-            Start_kilometers.setText("Kilometers in the beggining: " + startKilometers);
-            Total_kilometers.setText("Kilometers in the end: " + (Integer.parseInt(kilometrage.getText().toString()) - startKilometers));
-            int f = (Integer.parseInt(fuel.getText().toString()));
-            TotalToPay.setText("Total To Pay: " + (((Integer.parseInt(kilometrage.getText().toString()) - startKilometers) * 5.5) - (f * 2.5)) + "$");
-            carList(id);
+                    String x = currentHour();
+                    hour.setText(" " + x);
 
-            EndReserve();
-            Toast.makeText(getContext(), "The kilometer was update: ", Toast.LENGTH_LONG).show();
-            Start_kilometers.setVisibility(View.VISIBLE);
-            Total_kilometers.setVisibility(View.VISIBLE);
-            TotalToPay.setVisibility(View.VISIBLE);
-            hour.setVisibility(View.VISIBLE);
+                    Start_kilometers.setText("Kilometers in the beggining: " + startKilometers);
+                    Total_kilometers.setText("Total ilometers runing : " + (Integer.parseInt(kilometrage.getText().toString()) - startKilometers));
+                    TotalToPay.setText("Total To Pay: " + (((Integer.parseInt(kilometrage.getText().toString()) - startKilometers) * 5.5) - (f * 2.5)) + "$");
+                    carList(id);
 
-       }
-       else {
+                    EndReserve();
+                    Toast.makeText(getContext(), "The kilometer was update: ", Toast.LENGTH_LONG).show();
+                    Start_kilometers.setVisibility(View.VISIBLE);
+                    Total_kilometers.setVisibility(View.VISIBLE);
+                    TotalToPay.setVisibility(View.VISIBLE);
+                    hour.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+        } else {
             Toast.makeText(getContext(), "The reserve is already closed. ", Toast.LENGTH_LONG).show();
         }
     }
+
+
 
 
     void carList(final int id) {
