@@ -92,7 +92,6 @@ public class AllFreeCars extends Fragment implements SearchView.OnQueryTextListe
             badInternetDialog.show(getFragmentManager(), "badInternet");
         }
 
-        Toast.makeText(getContext(), newText, Toast.LENGTH_LONG).show();
         adapter.getFilter().filter(newText);
         adapter.notifyDataSetChanged();
         return false;

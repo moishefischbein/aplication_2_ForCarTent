@@ -23,14 +23,14 @@
 
         </activity>
 
-        <receiver
-            android:name=".model.backend.MyReceiver"
+      <!--  <receiver
+            android:name=".controller.fragments.All_Branches$myReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.example.moish.aplication_2_forCarRent.UPDATE" />
             </intent-filter>
-        </receiver>
+        </receiver>-->
 
         <service
             android:name=".model.backend.MyService"
