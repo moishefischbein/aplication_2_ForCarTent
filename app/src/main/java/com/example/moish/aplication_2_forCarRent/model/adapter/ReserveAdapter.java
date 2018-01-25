@@ -16,9 +16,6 @@ import com.example.moish.aplication_2_forCarRent.model.entities.CarReserve;
 import java.util.List;
 
 
-/**
- * Created by Bruno on 30/11/2017.
- */
 
 public class ReserveAdapter extends BaseAdapter {
 

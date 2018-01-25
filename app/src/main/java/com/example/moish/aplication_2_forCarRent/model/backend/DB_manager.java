@@ -14,6 +14,8 @@ public interface DB_manager {
     boolean removeClient(long id);
     boolean updateClient(long id, ContentValues values);
     List<Client> getClients();
+    long updateClient(long id, String password);
+    Client findClientById(int id);
 
     long addBranch(ContentValues branch);
     boolean removeBranch(long id);

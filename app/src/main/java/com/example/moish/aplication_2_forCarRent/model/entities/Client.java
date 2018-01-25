@@ -13,18 +13,20 @@ public class Client {
     String phoneNumber;
     String email;
     long creditCardNumber;
+    private String password;
 
 
     public Client() {
     }
 
-    public Client(String lastName, String firstName, int id, String phoneNumber, String email, long creditCardNumber) {
+    public Client(String lastName, String firstName, int id, String phoneNumber, String email, long creditCardNumber, String password) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.id = id;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.creditCardNumber = creditCardNumber;
+        this.password = password;
     }
 
     public String getLastName() {
@@ -85,5 +87,13 @@ public class Client {
                 ", email='" + email + '\'' +
                 ", creditCardNumber=" + creditCardNumber +
                 '}';
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

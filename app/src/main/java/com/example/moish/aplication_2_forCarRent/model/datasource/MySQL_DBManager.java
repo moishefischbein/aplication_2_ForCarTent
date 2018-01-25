@@ -51,6 +51,7 @@ public class MySQL_DBManager implements DB_manager {
                 client.setPhoneNumber(jsonObject.getString("phoneNumber"));
                 client.setEmail(jsonObject.getString("email"));
                 client.setCreditCardNumber(jsonObject.getLong("creditCardNumber"));
+                client.setPassword(jsonObject.getString("password"));
 
                 result.add(client);
             }
@@ -93,6 +94,16 @@ public class MySQL_DBManager implements DB_manager {
                 return true;
         }
         return false;
+    }
+
+    public Client findClientById(int id){
+        List<Client> clients = getClients();
+        for (Client clt:clients) {
+            if(clt.getId() == id)
+                return clt;
+        }
+        return null;
+
     }
 
     private void printLog(String s) {
@@ -382,6 +393,24 @@ public class MySQL_DBManager implements DB_manager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public long updateClient(long id, String password) {
+        try{
+            ContentValues values = new ContentValues();
+            values.put(Functions.ClientConst.ID, id);
+            values.put(Functions.ClientConst.PASSWORD, password);
+
+            String result = PHPtools.POST(WEB_URL + "updateClient.php", values);
+            long idReturned = Long.parseLong(result);
+            if(idReturned == id)
+                SetUpdate();
+            printLog("updateCar:\n" + result);
+            return id;
+        } catch (IOException e){
+            printLog("updateCar:\n" + e);
+        }
+        return 0;
     }
 
 

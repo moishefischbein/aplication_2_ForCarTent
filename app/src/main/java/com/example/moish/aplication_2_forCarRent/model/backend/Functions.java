@@ -23,6 +23,8 @@ public class Functions {
         public static final String PHONE = "phoneNumber";
         public static final String EMAIL = "email";
         public static final String CREDITCARDNUMBER = "CreditCardNumber";
+        public static final String PASSWORD = "password";
+
 
 
         public static final Uri CLIENT_URI = Uri.withAppendedPath(AUTHORITY_URI, "clients");
@@ -76,6 +78,7 @@ public class Functions {
         contentValues.put(Functions.ClientConst.PHONE, client.getPhoneNumber());
         contentValues.put(Functions.ClientConst.EMAIL, client.getEmail());
         contentValues.put(Functions.ClientConst.CREDITCARDNUMBER, client.getCreditCardNumber());
+            contentValues.put(ClientConst.PASSWORD, client.getPassword());
 
         return contentValues;
     }
@@ -89,6 +92,7 @@ public class Functions {
         client.setPhoneNumber(contentValues.getAsString(ClientConst.PHONE));
         client.setEmail(contentValues.getAsString(ClientConst.EMAIL));
         client.setCreditCardNumber(contentValues.getAsInteger(ClientConst.CREDITCARDNUMBER));
+        client.setPassword(contentValues.getAsString(ClientConst.PASSWORD));
 
         return client;
     }

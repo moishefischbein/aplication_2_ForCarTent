@@ -20,16 +20,22 @@ import com.example.moish.aplication_2_forCarRent.controller.fragments.AllFreeCar
 import com.example.moish.aplication_2_forCarRent.controller.fragments.All_Branches;
 import com.example.moish.aplication_2_forCarRent.controller.fragments.ExitDialog;
 import com.example.moish.aplication_2_forCarRent.controller.fragments.Home;
+import com.example.moish.aplication_2_forCarRent.controller.fragments.LoginFragment;
 import com.example.moish.aplication_2_forCarRent.controller.fragments.Profile;
+import com.example.moish.aplication_2_forCarRent.model.entities.Client;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private Client client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -50,14 +56,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        login();
+       /* FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
         Fragment fragment = new Home();
         fragmentTransaction.add(R.id.fragment_container, fragment);
-        fragmentTransaction.addToBackStack(null);
 
-        fragmentTransaction.commit();
-
+        fragmentTransaction.commit();*/
     }
 
     @Override
@@ -148,4 +153,30 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    private void login() {
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_container, new LoginFragment());
+        //ft.addToBackStack(null);
+        ft.commit();
+    }
+
+
+    private void logout() {
+        client = null; // clear the current logged client
+        login();
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client){
+        this.client = client;
+    }
 }
+//
+//
+//
+
+

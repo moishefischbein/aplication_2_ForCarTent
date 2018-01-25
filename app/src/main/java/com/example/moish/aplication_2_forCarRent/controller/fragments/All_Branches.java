@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.moish.aplication_2_forCarRent.R;
+import com.example.moish.aplication_2_forCarRent.controller.MainActivity;
 import com.example.moish.aplication_2_forCarRent.model.adapter.BranchAdapter;
 import com.example.moish.aplication_2_forCarRent.model.adapter.CarAdapter;
 import com.example.moish.aplication_2_forCarRent.model.backend.DBManagerFactory;
@@ -263,7 +264,9 @@ public class All_Branches extends Fragment implements AdapterView.OnItemSelected
     }
 
     public boolean verifyIfIdIsCorrect(int idClient){
-        return true;
+        if(((MainActivity)getActivity()).getClient().getId() == idClient)
+            return true;
+        return false;
     }
 
 
