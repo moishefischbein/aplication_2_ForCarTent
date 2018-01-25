@@ -104,14 +104,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (password.compareTo(passwordEntered) == 0) {// ok
             Snackbar.make(v, "Logged In", Snackbar.LENGTH_SHORT).show();
             ((MainActivity) getActivity()).setClient(client);// save client
-            getFragmentManager().beginTransaction().remove(this).commit();
-            /*
+            //getFragmentManager().beginTransaction().remove(this).commit();
+
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
             Fragment fragment = new Home();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
 
-            fragmentTransaction.commit();*/
+            fragmentTransaction.commit();
         } else {
             passwordWrapper.setError("Wrong password");
         }

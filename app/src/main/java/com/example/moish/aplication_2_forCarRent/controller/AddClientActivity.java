@@ -26,6 +26,7 @@ public class AddClientActivity extends Activity implements View.OnClickListener{
     private EditText telephoneEditText;
     private EditText emailEditText;
     private EditText creditCardEditText;
+    private EditText password;
     private Button addClientButton;
 
 
@@ -36,6 +37,7 @@ public class AddClientActivity extends Activity implements View.OnClickListener{
         telephoneEditText = (EditText)findViewById( R.id.PhoneEditText );
         emailEditText = (EditText)findViewById( R.id.EmailEditText );
         creditCardEditText = (EditText)findViewById( R.id.creditCardNumberEditText );
+        password = (EditText)findViewById( R.id.password_client );
         addClientButton = (Button)findViewById( R.id.addClientButton);
 
         addClientButton.setOnClickListener( this );
@@ -55,6 +57,8 @@ public class AddClientActivity extends Activity implements View.OnClickListener{
             values.put(Functions.ClientConst.PHONE, telephoneEditText.getText().toString());
             values.put(Functions.ClientConst.EMAIL, emailEditText.getText().toString());
             values.put(Functions.ClientConst.CREDITCARDNUMBER, creditCardEditText.getText().toString());
+            values.put(Functions.ClientConst.PASSWORD, password.getText().toString());
+
 
             new AsyncTask<Void, Void, Long>(){
                 @Override

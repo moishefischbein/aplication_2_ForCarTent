@@ -55,7 +55,7 @@
                         android:background="#E0E0E0"
                         android:hint="@string/username"
                         android:ems="10"
-                        android:inputType="textPersonName"
+                        android:inputType="number"
                         />
 
                 </android.support.design.widget.TextInputLayout>
