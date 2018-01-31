@@ -9,7 +9,7 @@
 
         <item
             android:id="@+id/Actual_state"
-            android:title="My profile" />
+            android:title="Finish reserve" />
         <!-- android:icon="@drawable/ic_menu_manage"-->
 
         <item
